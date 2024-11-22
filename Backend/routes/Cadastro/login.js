@@ -1,0 +1,55 @@
+const express = require("express");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const authenticateToken = require("../../middleware/auth");
+const Usuario = require("../../models/usuarios");
+
+const router = express.Router();
+const SECRET_KEY = "sua_chave_secreta"; // Substitua por uma chave segura em produção
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, senha } = req.body;
+
+    if (!email || !senha) {
+      return res
+        .status(400)
+        .json({ message: "Email e senha são obrigatórios." });
+    }
+
+    const usuario = await Usuario.findOne({ where: { email } });
+
+    if (!usuario) {
+      return res.status(404).json({ message: "Usuário não encontrado." });
+    }
+
+    const senhaValida = await bcrypt.compare(senha, usuario.senha);
+
+    if (!senhaValida) {
+      return res.status(401).json({ message: "Senha incorreta." });
+    }
+
+    const token = jwt.sign(
+      { id: usuario.id, email: usuario.email },
+      SECRET_KEY,
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    res.status(200).json({
+      message: "Login bem-sucedido.",
+      token,
+      usuario: {
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email,
+      },
+    });
+  } catch (error) {
+    console.error("Erro no login:", error);
+    res.status(500).json({ message: "Erro ao processar login." });
+  }
+});
+
+module.exports = router;
