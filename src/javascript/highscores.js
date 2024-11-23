@@ -5,14 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
 async function fetchHighScores() {
   const email = localStorage.getItem("email")
   try {
-    const response = await fetch("http://localhost:3000/score", {
+    const response = await fetch(`http://localhost:3000/score?email=${email}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         //'Authorization': `Bearer ${token}` // Inclui o token no cabeçalho
       },
-
-      body: JSON.stringify({ email, senha }),
     });
 
     console.log(response);

@@ -6,7 +6,6 @@ const cadastro = require("./routes/Cadastro/cadastro");
 const login = require("./routes/Cadastro/login");
 const score = require("./routes/score/score");
 const profile = require("./routes/Cadastro/profile");
-const score = require("./routes/score/score");
 const feedback = require("./routes/Feedback/feedbackRoute");
 app.use(express.json());
 
