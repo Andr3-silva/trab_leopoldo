@@ -1,3 +1,16 @@
+
+// Função para verificar se o usuário está autenticado
+function checkAuthentication() {
+  const token = localStorage.getItem("authToken");
+  if (!token) {
+    // Usuário não está autenticado, redireciona para a página de login
+    window.location.href = "./login.html";
+  }
+}
+
+// Chama a função de verificação ao carregar o script
+// checkAuthentication();
+
 //selecting all required elements
 const start_btn_home = document.querySelector(".start_btn");
 const start_btn = document.querySelector(".start_btn #button_play");
@@ -60,7 +73,7 @@ const quit_quiz = result_box.querySelector(".buttons .quit");
 // if restartQuiz button clicked
 restart_quiz.onclick = () => {
   localStorage.setItem("mostRecentScore", userScore); /*go to the end page*/
-  return window.location.assign("./src/pages/end.html");
+  return window.location.assign("../pages/end.html");
 };
 
 // if quitQuiz button clicked
