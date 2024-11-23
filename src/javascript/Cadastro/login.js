@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return; // Impede a continuação da função
     }
 
-    console.log(email)
     try {
       const response = await fetch("http://localhost:3000/login", {
         // Certifique-se de que esta é a rota correta

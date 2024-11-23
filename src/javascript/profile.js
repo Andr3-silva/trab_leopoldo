@@ -1,19 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+     // Função de Logout
+     function logout() {
+        // Remover o email do localStorage para deslogar o usuário
+        localStorage.removeItem("email");
+        
+        // Redirecionar o usuário para a página inicial ou de login
+        window.location.href = "home.html";  // Mude "home.html" para a página de login se houver uma
+    }
+
+    // Vincular a função de logout ao botão
+    document.getElementById("logoutButton").addEventListener("click", logout);
+
+
     // Função para buscar dados do jogador no backend
     async function getPlayerData() {
+        const email = localStorage.getItem("email");
         try {
-            const response = await fetch('/api/player/profile'); // Ajuste a rota conforme necessário
+            const response = await fetch(`http://localhost:3000/profile?email=${encodeURIComponent(email)}`, {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            }); // Certifique-se de que esta rota corresponde à configurada no backend
+            
             const data = await response.json();
-
-            document.getElementById('playerName').textContent = data.name;
-            document.getElementById('playerEmail').textContent = data.email;
-            document.getElementById('playerScore').textContent = data.score;
+            
+            // Atualizar o conteúdo dos elementos com os dados do jogador
+            document.getElementById('playerName').textContent = data.nome;  // 'nome' vindo do backend
+            document.getElementById('playerEmail').textContent = data.email; // 'email' vindo do backend
+            document.getElementById('playerScore').textContent = data.pontuacao; // 'pontuacao' vindo do backend
         } catch (error) {
             console.error('Erro ao buscar dados do jogador:', error);
         }
     }
 
-    // Chamada da função
+    // Chamada da função para buscar os dados do jogador ao carregar a página
     getPlayerData();
 
     // Função para alternar a exibição da barra de navegação no celular
