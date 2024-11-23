@@ -24,12 +24,15 @@ router.post("/", async (req, res) => {
 
     if (!(pontuacaoAtual >= score)) {
       await usuario.update({ pontuacao: score });
+      console.log("Pontuação atualizada.")
     }
 
     res.status(201).json({
       message: "Pontuação salva com sucesso",
       usuario: usuario,
     });
+
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Erro ao salvar a pontuação" });
