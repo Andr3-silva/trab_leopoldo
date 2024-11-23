@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/profile.css">
+    <title>Perfil do Jogador</title>
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
+        <div class="navbar-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="sobre.html"class="nav-link">Sobre o Projeto</a>
+            <a href="feedback.html"class="nav-link">Feedback</a>
+            <a href="highscores.html"class="nav-link">Pontuação</a>
+            <a href="#" class="nav-link" >Logout</a>
+        </div>
+    </nav>
+
+    <!-- Seção do Perfil -->
+    <div class="profile-container">
+        <h2>Perfil do Jogador</h2>
+        <div class="profile-info">
+            <div class="profile-item">
+                <label>Nome:</label>
+                <span id="playerName">Carregando...</span>
+            </div>
+            <div class="profile-item">
+                <label>Email:</label>
+                <span id="playerEmail">Carregando...</span>
+            </div>
+            <div class="profile-item">
+                <label>Pontuação:</label>
+                <span id="playerScore">Carregando...</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="../javascript/profile.js"></script>
+</body>
+</html>
