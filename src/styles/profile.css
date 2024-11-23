@@ -115,3 +115,22 @@ body {
         display: flex;
     }
 }
+
+.home-button {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #007bff;
+}
+.home-button:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+.profile-container button {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}

@@ -10,25 +10,29 @@
 
     <!-- Barra de navegação -->
     <nav class="navbar">
-        <a href="home.html" class="nav-link">Home</a>
-        <a href="sobre.html" class="nav-link">Sobre o Projeto</a>
-        <a href="feedback.html" class="nav-link">Feedback</a>
-        <a href="highscores.html" class="nav-link">Pontuação</a>
-        <a href="profile.html" class="nav-link">Perfil</a>
+        <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
+        <div class="navbar-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="sobre.html" class="nav-link">Sobre o Projeto</a>
+            <a href="feedback.html" class="nav-link">Feedback</a>
+            <a href="highscores.html" class="nav-link">Pontuação</a>
+            <a href="profile.html" class="nav-link">Perfil</a>
+        </div>
     </nav>
+
 
     <div class="info_box">
         <div class="info-title">Bem-vindo ao Quiz!</div>
         <div class="info-list">
-            <p class="info">Neste quiz, você enfrentará uma série de perguntas sobre diferentes temas. Você terá 15 segundos para responder cada questão</p>
+            <p class="info">Neste quiz, você enfrentará uma série de perguntas sobre diferentes temas. </p>
             <p class="info">Qunato mais questões corretas, mais pontos ganhará! Ao final, quem acertar tudo receberá uma recompensa!</p>
         </div>
         <div class="buttons">
-            <button class="login_btn">Login</button>
-            <button class="register_btn">Cadastro</button>
+            <button class="login_btn"><a href="./Cadastro/login.html">Login</a></button>
+            <button href="./Cadastro/cadastro.html" class="register_btn"><a href="./Cadastro/cadastro.html">Cadastro</a></button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="../javascript/script.js"></script>
 </body>
 </html>
