@@ -20,8 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return; // Impede a continuação da função
     }
 
+    console.log(email)
     try {
-      const response = await fetch("/login", {
+      const response = await fetch("http://localhost:3000/login", {
         // Certifique-se de que esta é a rota correta
         method: "POST",
         headers: {
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response) {
         // Login bem-sucedido
         const { token, usuario } = data;
 
@@ -41,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("email", usuario.email);
 
         // Redireciona para a página desejada após o login
-        window.location.href = "#"; // Substitua pelo caminho correto
+        window.location.href = "../../pages/sobre.html"; // Substitua pelo caminho correto
       } else {
         // Erro no login
         alert(data.message || "Erro ao fazer login. Tente novamente.");

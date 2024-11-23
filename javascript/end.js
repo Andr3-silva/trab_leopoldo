@@ -37,7 +37,7 @@ async function saveHighScore(backendRoute, score) {
   // }
 
   try {
-    const response = await fetch("http://localhost:1000/score", {
+    const response = await fetch("http://localhost:3000/score", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
