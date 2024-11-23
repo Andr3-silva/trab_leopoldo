@@ -8,6 +8,8 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     const { email, score } = req.body;
+    console.log("score do quiz", score)
+    console.log("email",email)
 
     if (!score) {
       return res.status(400).json({ message: "Nenhuma pontuação enviada!" });
@@ -20,22 +22,39 @@ router.post("/", async (req, res) => {
     }
 
     const pontuacaoAtual = usuario.pontuacao;
-    console.log("Pontuação atual do usuario:", pontuacaoAtual);
-
-    if (!(pontuacaoAtual >= score)) {
+    console.log("Pontuação no banco:", pontuacaoAtual)
+    
+    if (!pontuacaoAtual || score > pontuacaoAtual) {
       await usuario.update({ pontuacao: score });
-      console.log("Pontuação atualizada.")
+      console.log("Pontuação atualizada.");
     }
-
-    res.status(201).json({
+    
+    res.status(200).json({
       message: "Pontuação salva com sucesso",
       usuario: usuario,
     });
-
-    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Erro ao salvar a pontuação" });
+  }
+});
+
+
+router.get("/", async (req, res) => {
+  const email = req.body.email
+
+  try {
+    const pontuacoes = await Usuario.findAll({
+      attributes: ["nome", "pontuacao"]
+    })
+
+  //console.log(pontuacoes)
+
+  res.status(200).send(pontuacoes)
+    
+  } catch (error) {
+    console.log("Erro ao puxar as pontuações")
+    res.status(400).send({error: error})
   }
 });
 

@@ -71,10 +71,10 @@ const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
 
 // if restartQuiz button clicked
-restart_quiz.onclick = () => {
-  localStorage.setItem("mostRecentScore", userScore); /*go to the end page*/
-  window.location.assign("../pages/end.html");
-};
+// restart_quiz.onclick = () => {
+//   localStorage.setItem("mostRecentScore", userScore); /*go to the end page*/
+//   window.location.assign("../src/pages/end.html");
+// };
 
 // if quitQuiz button clicked
 quit_quiz.onclick = () => {
@@ -212,6 +212,33 @@ function showResult() {
       "</p></span>";
     scoreText.innerHTML = scoreTag;
   }
+  console.log(userScore*10)
+  savePlayerScore(userScore*10);
+}
+
+async function savePlayerScore(score) {
+  console.log("Pontuação na função de salvar:", score)
+  const email = localStorage.getItem("email"); 
+
+  if (!email) {
+    alert("Erro: E-mail do jogador não encontrado.");
+    return;
+  }
+
+  await fetch("http://localhost:3000/score", { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, score })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Pontuação salva com sucesso:', data);
+  })
+  .catch((error) => {
+    console.error('Erro ao salvar pontuação:', error);
+  });
 }
 
 function startTimer(time) {
@@ -268,3 +295,10 @@ function queCounter(index) {
     "</p> Questões</span>";
   bottom_ques_counter.innerHTML = totalQueCounTag; //adding new span tag inside bottom_ques_counter
 }
+
+const viewScoreBtn = result_box.querySelector(".buttons #view-score");
+
+// Adicionando o evento de clique
+viewScoreBtn.onclick = () => {
+  window.location.href = "./pages/highscores.html";
+};
