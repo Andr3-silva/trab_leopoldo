@@ -32,6 +32,6 @@ const Feedback = sequelize.define(
   }
 );
 
-Feedback.sync();
+//Feedback.sync();
 
 module.exports = Feedback;

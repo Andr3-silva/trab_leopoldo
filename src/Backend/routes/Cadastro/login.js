@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
   try {
     const email = req.body.email;
     const senha = req.body.senha;
-    console.log("valor do email:", email)
+    console.log("valor do email:", email);
 
     if (!email || !senha) {
       return res
@@ -44,6 +44,7 @@ router.post("/", async (req, res) => {
       token,
       usuario: {
         id: usuario.id,
+        hierarquia: usuario.hierarquia,
         nome: usuario.nome,
         email: usuario.email,
       },

@@ -7,6 +7,7 @@ const login = require("./routes/Cadastro/login");
 const score = require("./routes/score/score");
 const profile = require("./routes/Cadastro/profile");
 const feedback = require("./routes/Feedback/feedbackRoute");
+const hierarquia = require("./routes/Cadastro/hierarquia");
 app.use(express.json());
 
 app.use(
@@ -25,6 +26,7 @@ app.use("/login", login);
 app.use("/score", score);
 app.use("/profile", profile);
 app.use("/feedback", feedback);
+app.use("/", hierarquia);
 
 app.listen(PORT, () => {
   console.log("Servidor Rodando na porta 3000");

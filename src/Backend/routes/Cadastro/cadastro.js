@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const { nome, email, senha } = req.body;
+    const { nome, email, senha, hierarquia } = req.body;
     console.log("Tentativa de cadastro com email:", email);
 
     // Verifica se todos os campos estão presentes
@@ -30,6 +30,7 @@ router.post("/", async (req, res) => {
     const novoUsuario = await Usuario.create({
       nome: nome,
       email: email,
+      hierarquia: hierarquia,
       senha: hashedSenha,
     });
 
@@ -37,6 +38,7 @@ router.post("/", async (req, res) => {
       message: "Usuário cadastrado com sucesso!",
       usuario: {
         id: novoUsuario.id,
+        hierarquia: novoUsuario.hierarquia,
         nome: novoUsuario.nome,
         email: novoUsuario.email,
         // Não retorne a senha mesmo que esteja hasheada
