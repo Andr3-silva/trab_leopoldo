@@ -505,3 +505,42 @@ footer button.show {
 .hidden {
     display: none;
 } 
+
+/* Estilos para o botão de música */
+#musicToggle {
+    background-color: #4CAF50; /* Cor de fundo verde */
+    color: white; /* Cor do texto */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #musicToggle i {
+    margin-right: 8px; /* Espaço entre o ícone e o texto */
+  }
+  
+  #musicToggle:hover {
+    background-color: #45a049; /* Cor de fundo mais escura ao passar o mouse */
+  }
+  
+  #musicToggle:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); /* Destaque ao focar */
+  }
+  
+  /* Responsividade: Centraliza o botão em telas menores */
+  @media (max-width: 600px) {
+    #musicToggle {
+      width: 100%;
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  
