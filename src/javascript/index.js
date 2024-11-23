@@ -212,7 +212,9 @@ function showResult() {
       "</p></span>";
     scoreText.innerHTML = scoreTag;
   }
-  console.log(userScore*10)
+  
+  const pontuacaoGame = userScore*10
+  localStorage.setItem("scoreGame", pontuacaoGame)
   savePlayerScore(userScore*10);
 }
 

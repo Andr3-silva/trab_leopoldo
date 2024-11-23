@@ -41,11 +41,10 @@ router.post("/", async (req, res) => {
 
 
 router.get("/", async (req, res) => {
-  const email = req.body.email
-
+  
   try {
     const pontuacoes = await Usuario.findAll({
-      attributes: ["nome", "pontuacao"]
+      attributes: ["nome", "pontuacao", "email"]
     })
 
   //console.log(pontuacoes)
