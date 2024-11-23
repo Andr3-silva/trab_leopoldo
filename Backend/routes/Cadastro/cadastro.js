@@ -5,7 +5,7 @@ const Usuario = require("../../models/usuarios");
 
 const router = express.Router();
 
-router.post("/cadastro", authenticateToken, async (req, res) => {
+router.post("/cadastro", async (req, res) => {
   try {
     const { nome, email, senha } = req.body;
 
@@ -24,8 +24,8 @@ router.post("/cadastro", authenticateToken, async (req, res) => {
     const hashedSenha = await bcrypt.hash(senha, 10);
 
     const novoUsuario = await Usuario.create({
-      nome,
-      email,
+      nome: nome,
+      email: email,
       senha: hashedSenha,
     });
 
