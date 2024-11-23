@@ -7,9 +7,11 @@ const Usuario = require("../../models/usuarios");
 const router = express.Router();
 const SECRET_KEY = "sua_chave_secreta"; // Substitua por uma chave segura em produção
 
-router.post("/login", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const { email, senha } = req.body;
+    const email = req.body.email;
+    const senha = req.body.senha;
+    console.log("valor do email:", email)
 
     if (!email || !senha) {
       return res

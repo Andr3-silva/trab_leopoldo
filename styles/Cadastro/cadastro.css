@@ -85,3 +85,28 @@ h1 {
         font-size: 1.5rem;
     }
 }
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar .nav-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 20px;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #0263ca;
+}

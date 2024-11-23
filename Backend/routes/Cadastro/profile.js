@@ -6,9 +6,9 @@ const router = express.Router();
 // Rota para obter o perfil do usuário
 router.get("/profile", async (req, res) => {
   try {
-    // Recuperar o email do usuário diretamente do corpo da requisição ou da query
-    const { email } = req.body; // Ou req.query.email se passar o email como query param
-
+    // Recuperar o email do usuário a partir dos parâmetros de consulta (query params)
+    const { email } = req.query;
+    console.log(email);
     if (!email) {
       return res.status(400).json({ message: "Email não fornecido." });
     }
