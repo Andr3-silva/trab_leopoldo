@@ -100,3 +100,9 @@ li.current-user .badge {
 .btn:hover {
   background-color: #0056b3;
 }
+
+.top-icon {
+  font-size: 1.5em;
+  color: gold;
+  margin-left: 10px;
+}

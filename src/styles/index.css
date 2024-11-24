@@ -543,4 +543,26 @@ footer button.show {
       padding: 8px 16px;
     }
   }
+
+.hint_btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .hint_btn:hover {
+    background-color: #0059b9;
+  }
+  
+  .hint_btn:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+  
   
