@@ -1,3 +1,16 @@
+function logout() {
+    // Remover o email do localStorage para deslogar o usuário
+    sessionStorage.removeItem("email");
+  
+    // Redirecionar o usuário para a página inicial ou de login
+    window.location.href = "home.html"; // Mude "home.html" para a página de login se houver uma
+  }
+  
+  // Vincular a função de logout ao botão
+  document.getElementById("logoutButton").addEventListener("click", logout);
+  const email = sessionStorage.getItem("email")
+
+
 document.addEventListener('DOMContentLoaded', function() {
     window.toggleNavbar = function() {
         const navbarLinks = document.querySelector('.navbar-links');
