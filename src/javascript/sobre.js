@@ -1,2 +1,4 @@
-// Este script pode ser expandido para incluir interatividade adicional caso necessário
-console.log("Tela 'Sobre o Projeto' carregada.");
+window.toggleNavbar = function() {
+    const navbarLinks = document.querySelector('.navbar-links');
+    navbarLinks.classList.toggle('show');
+};
