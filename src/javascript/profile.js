@@ -9,15 +9,24 @@ function logout() {
 
 // Vincular a função de logout ao botão
 document.getElementById("logoutButton").addEventListener("click", logout);
-const email = sessionStorage.getItem("email")
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  const email = sessionStorage.getItem("email");
+  if (!email) {
+    // Exibir prompt de login/cadastro
+    document.getElementById("loginPrompt").style.display = "block";
+    document.getElementById("profileSection").style.display = "none";
+  }
+  
   // Função para verificar se o usuário tem a maior pontuação
   async function verificarPontuacao() {
     try {
       // Faz uma requisição para verificar se o usuário logado tem hierarquia 1
       const response = await fetch(
-        `http://localhost:3000/verificarHierarquia/${encodeURIComponent(email)}`,
+        `http://localhost:3000/verificarHierarquia/${encodeURIComponent(
+          email
+        )}`,
         {
           method: "GET",
           headers: {
@@ -28,7 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       const data = await response.json();
-      console.log("Data na tela tela profile.js via rota verificar hierarquia:", data)
+      console.log(
+        "Data na tela tela profile.js via rota verificar hierarquia:",
+        data
+      );
 
       // Se o usuário tiver hierarquia 1, redireciona para a tela de vencedor
       if (data.isWinner) {

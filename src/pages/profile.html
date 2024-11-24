@@ -49,16 +49,5 @@
     </div>
 
     <script src="../javascript/profile.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Exibir a seção correta com base no status do login
-            const email = localStorage.getItem("email");
-            if (!email) {
-                // Exibir prompt de login/cadastro
-                document.getElementById("loginPrompt").style.display = "block";
-                document.getElementById("profileSection").style.display = "none";
-            }
-        });
-    </script>
 </body>
 </html>

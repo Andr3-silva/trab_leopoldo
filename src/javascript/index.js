@@ -1,6 +1,6 @@
 // Função para verificar se o usuário está autenticado
 function checkAuthentication() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) {
     // Usuário não está autenticado, redireciona para a página de login
     alert("Usuário não autenticado! Redirecionando para a tela de login...");
@@ -252,13 +252,13 @@ function showResult() {
 
   const pontuacaoGame = userScore * 10;
   console.log("Pontuação", pontuacaoGame);
-  localStorage.setItem("score", pontuacaoGame);
+  sessionStorage.setItem("score", pontuacaoGame);
   savePlayerScore(userScore * 10);
 }
 
 async function savePlayerScore(score) {
   console.log("Pontuação na função de salvar:", score);
-  const email = localStorage.getItem("email");
+  const email = sessionStorage.getItem("email");
 
   if (!email) {
     alert("Erro: E-mail do jogador não encontrado.");
