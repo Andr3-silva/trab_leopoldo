@@ -4,7 +4,7 @@ window.toggleNavbar = function() {
 };
 document.addEventListener('DOMContentLoaded', function() {
     // Verifica se o usuário está logado
-    const email = localStorage.getItem("email");
+    const email = sessionStorage.getItem("email");
     
     if (email) {
         // Se o usuário estiver logado, esconde os botões de login e cadastro

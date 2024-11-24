@@ -1,7 +1,7 @@
 // Função de Logout
 function logout() {
   // Remover o email do localStorage para deslogar o usuário
-  localStorage.removeItem("email");
+  sessionStorage.removeItem("email");
 
   // Redirecionar o usuário para a página inicial ou de login
   window.location.href = "home.html"; // Mude "home.html" para a página de login se houver uma
@@ -9,7 +9,7 @@ function logout() {
 
 // Vincular a função de logout ao botão
 document.getElementById("logoutButton").addEventListener("click", logout);
-const email = localStorage.getItem("email")
+const email = sessionStorage.getItem("email")
 
 document.addEventListener("DOMContentLoaded", function () {
   // Função para verificar se o usuário tem a maior pontuação
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Função para buscar e exibir os dados do jogador
   async function getPlayerData() {
-    const email = localStorage.getItem("email");
+    const email = sessionStorage.getItem("email");
     try {
       const response = await fetch(
         `http://localhost:3000/profile?email=${encodeURIComponent(email)}`,

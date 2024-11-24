@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   displayLastScore(); // Chamar a função para exibir a última pontuação
 });
 
-const email = localStorage.getItem("email")
-const lastScore = parseInt(localStorage.getItem("score"), 10);
+const email = sessionStorage.getItem("email")
+const lastScore = parseInt(sessionStorage.getItem("score"), 10);
 
 function fetchHighScores() {
   fetch(`http://localhost:3000/score?email=${email}`) // Substitua pela sua rota real
@@ -45,9 +45,9 @@ function displayHighScores(scores) {
   const topFive = validScores.slice(0, 5);
   console.log("Top 5 pontuações:", topFive);
 
-  const lastScore = parseInt(localStorage.getItem("score"), 10);
+  const lastScore = parseInt(sessionStorage.getItem("score"), 10);
   console.log("LastScore", lastScore)
-  const userEmail = localStorage.getItem("email");
+  const userEmail = sessionStorage.getItem("email");
 
   let isLastScoreInTopFive = false;
 
@@ -89,7 +89,7 @@ function displayHighScores(scores) {
 
 function displayLastScore() {
   const lastScoreText = document.getElementById("last-score-text");
-  const lastScoreString = localStorage.getItem("score")
+  const lastScoreString = sessionStorage.getItem("score")
 
   if (lastScore !== null) {
     lastScoreText.textContent = `Você marcou ${lastScoreString} pontos!`;
