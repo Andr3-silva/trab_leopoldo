@@ -5,7 +5,7 @@ let questions = [
       category: "General Knowledge",
       type: "multiple",
       difficulty: "easy",
-      question: "What does HTML stand for?",
+      question: "O que significa HTML?",
       answer: "Hyper Text Markup Language",
       options: [
         "Hyper Text Preprocessor",
@@ -19,7 +19,7 @@ let questions = [
       category: "General Knowledge",
       type: "multiple",
       difficulty: "easy",
-      question: "What does CSS stand for?",
+      question: "O que significa CSS?",
       answer: "Cascading Style Sheet",
       options: [
         "Common Style Sheet",
@@ -33,7 +33,7 @@ let questions = [
       category: "General Knowledge",
       type: "multiple",
       difficulty: "easy",
-      question: "What does PHP stand for?",
+      question: "O que significa PHP?",
       answer: "Hypertext Preprocessor",
       options: [
         "Hypertext Preprocessor",
@@ -47,7 +47,7 @@ let questions = [
       category: "General Knowledge",
       type: "multiple",
       difficulty: "easy",
-      question: "What does SQL stand for?",
+      question: "O significa SQL?",
       answer: "Structured Query Language",
       options: [
         "Stylish Question Language",
@@ -61,7 +61,7 @@ let questions = [
       category: "General Knowledge",
       type: "multiple",
       difficulty: "easy",
-      question: "What does XML stand for?",
+      question: "O que significa XML?",
       answer: "eXtensible Markup Language",
       options: [
         "eXtensible Markup Language",
@@ -84,7 +84,7 @@ let questions = [
       category: "General Knowledge",
       type: "multiple",
       difficulty: "easy",
-      question: "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?   ",
+      question: "Virgin Trains, Virgin Atlantic and Virgin Racing, são companhias de quem empreendedor famoso?",
       answer: "Richard Branson",
       options: ["Richard Branson","Alan Sugar", "Donald Trump", "Bill Gates"],
     },
