@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
+    function logout() {
+        // Remover o email do localStorage para deslogar o usuário
+        localStorage.removeItem("email");
+        
+        // Redirecionar o usuário para a página inicial ou de login
+        window.location.href = "home.html";  // Mude "home.html" para a página de login se houver uma
+    }
 
+    // Vincular a função de logout ao botão
+    document.getElementById("logoutButton").addEventListener("click", logout);
 
 
    // Função para buscar dados do jogador no backend
