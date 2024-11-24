@@ -1,11 +1,9 @@
 const express = require("express");
-const authenticateToken = require("../../middleware/auth");
 const Usuario = require("../../models/usuarios");
-
 const router = express.Router();
 
 // Rota para verificar se o usuário tem hierarquia 1
-router.get("/verificarHierarquia", authenticateToken, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const userEmail = req.user.email;  // Obtém o email do usuário logado via token
 

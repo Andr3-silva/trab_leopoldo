@@ -16,19 +16,31 @@ router.post("/", async (req, res) => {
     }
 
     const usuario = await Usuario.findOne({ where: { email } });
+    const usuarioMaxPont = await Usuario.findOne({ hierarquia : 1})
+    //console.log(usuarioMaxPont)
 
     if (!usuario) {
       return res.status(400).json({ message: "Usuário não encontrado." });
     }
 
     const pontuacaoAtual = usuario.pontuacao;
-    console.log("Pontuação no banco:", pontuacaoAtual)
+
+    // console.log("Pontuação no banco:", pontuacaoAtual)
     
-    if (!pontuacaoAtual || score > pontuacaoAtual) {
+    if (score) {
       await usuario.update({ pontuacao: score });
       console.log("Pontuação atualizada.");
     }
+
+    if(!pontuacaoAtual || score > usuario.pontuacaoMax){
+      await usuario.update({ pontuacaoMax: score });
+    }
     
+    if(score >= usuarioMaxPont.pontuacao){
+      await usuarioMaxPont.update({hierarquia: 0})
+      await usuario.update({hierarquia: 1})
+    }
+
     res.status(200).json({
       message: "Pontuação salva com sucesso",
       usuario: usuario,
