@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #ffffff;
+  background-color: #007bff;
   color: #333333;
 }
 
@@ -13,6 +13,9 @@ body {
   margin: 50px auto;
   padding: 20px;
   text-align: center;
+  background-color: #f9f9f9; /* Fundo branco */
+  border-radius: 10px;        /* Cantos arredondados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra suave */
 }
 
 h1 {
