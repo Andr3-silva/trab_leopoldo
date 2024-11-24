@@ -178,3 +178,9 @@ form textarea {
     font-size: 16px;
     color: #007bff;
 }
+
+body {
+    background-color: #007bff; /* Fundo azul */
+    min-height: 100vh; /* Garante que o fundo cubra toda a altura da página */
+    padding-top: 70px; /* Espaço para a navbar fixa */
+}
