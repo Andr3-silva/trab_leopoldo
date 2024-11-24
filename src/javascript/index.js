@@ -1,15 +1,16 @@
 
 // Função para verificar se o usuário está autenticado
 function checkAuthentication() {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("token");
   if (!token) {
     // Usuário não está autenticado, redireciona para a página de login
-    window.location.href = "./login.html";
+    alert("Usuário não autenticado! Redirecionando para a tela de login...")
+    window.location.href = "../src/pages/Cadastro/login.html";
   }
 }
 
 // Chama a função de verificação ao carregar o script
-// checkAuthentication();
+checkAuthentication();
 
 //selecting all required elements
 const start_btn_home = document.querySelector(".start_btn");
@@ -214,7 +215,8 @@ function showResult() {
   }
   
   const pontuacaoGame = userScore*10
-  localStorage.setItem("scoreGame", pontuacaoGame)
+  console.log("Pontuação", pontuacaoGame)
+  localStorage.setItem("score", pontuacaoGame)
   savePlayerScore(userScore*10);
 }
 
