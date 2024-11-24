@@ -1,37 +1,30 @@
 const express = require("express");
+const authenticateToken = require("../../middleware/auth");
 const Usuario = require("../../models/usuarios");
 
 const router = express.Router();
 
-// Rota para obter o perfil do usuário
-router.get("/", async (req, res) => {
+// Rota para verificar se o usuário tem hierarquia 1
+router.get("/verificarHierarquia", authenticateToken, async (req, res) => {
   try {
-    // Recuperar o email do usuário a partir dos parâmetros de consulta (query params)
-    const { email } = req.query;
-    console.log(email);
-    if (!email) {
-      return res.status(400).json({ message: "Email não fornecido." });
-    }
+    const userEmail = req.user.email;  // Obtém o email do usuário logado via token
 
-    // Buscar o usuário no banco de dados com base no email
-    const usuario = await Usuario.findOne({
-      where: { email: email },
-      attributes: ["nome", "email", "pontuacao"], // Selecionar apenas os campos desejados
-    });
-
+    // Encontrar o usuário logado
+    const usuario = await Usuario.findOne({ where: { email: userEmail } });
     if (!usuario) {
       return res.status(404).json({ message: "Usuário não encontrado." });
     }
 
-    // Retornar as informações do usuário
-    res.status(200).json({
-      nome: usuario.nome,
-      email: usuario.email,
-      pontuacao: usuario.pontuacao,
-    });
+    // Verificar se o usuário tem hierarquia 1
+    if (usuario.hierarquia === 1) {
+      return res.status(200).json({ isWinner: true, usuario: usuario });
+    } else {
+      return res.status(200).json({ isWinner: false });
+    }
+
   } catch (error) {
-    console.error("Erro ao obter informações do usuário:", error);
-    res.status(500).json({ message: "Erro ao processar solicitação." });
+    console.error("Erro ao verificar hierarquia:", error);
+    res.status(500).json({ message: "Erro interno do servidor ao verificar hierarquia." });
   }
 });
 

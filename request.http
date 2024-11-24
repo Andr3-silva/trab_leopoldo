@@ -2,5 +2,5 @@ GET  http://localhost:3000/profile
 Content-Type: application/json
 
 {
-  "email": "lopezguilherme@hotmail.com"
+  "email": "as.costa@email.br"
 }

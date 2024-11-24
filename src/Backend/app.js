@@ -28,7 +28,7 @@ app.use("/score", score);
 app.use("/profile", profile);
 app.use("/feedback", feedback);
 app.use("/", hierarquia);
-app.use("/vencedor",vencedor);
+app.use("/verificarHierarquia", vencedor);
 
 app.listen(PORT, () => {
   console.log("Servidor Rodando na porta 3000");
