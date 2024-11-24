@@ -1,15 +1,13 @@
-
 // Função para verificar se o usuário está autenticado
 function checkAuthentication() {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("token");
   if (!token) {
     // Usuário não está autenticado, redireciona para a página de login
     window.location.href = "./login.html";
   }
 }
 
-// Chama a função de verificação ao carregar o script
-// checkAuthentication();
+checkAuthentication();
 
 //selecting all required elements
 const start_btn_home = document.querySelector(".start_btn");
@@ -41,14 +39,13 @@ exit_btn.onclick = () => {
 
 // if continueQuiz button clicked
 continue_btn.onclick = () => {
-  
   info_box.classList.remove("activeInfo"); //hide info box
   start_btn_home.classList.add("hidden");
 
   loader.classList.remove("hidden");
   const myTimeout = setTimeout(startQuiz, 3000);
 
-  function startQuiz() {    
+  function startQuiz() {
     loader.classList.add("hidden");
     start_btn_home.classList.remove("hidden");
     quiz_box.classList.add("activeQuiz"); //show quiz box
@@ -212,35 +209,35 @@ function showResult() {
       "</p></span>";
     scoreText.innerHTML = scoreTag;
   }
-  
-  const pontuacaoGame = userScore*10
-  localStorage.setItem("scoreGame", pontuacaoGame)
-  savePlayerScore(userScore*10);
+
+  const pontuacaoGame = userScore * 10;
+  localStorage.setItem("scoreGame", pontuacaoGame);
+  savePlayerScore(userScore * 10);
 }
 
 async function savePlayerScore(score) {
-  console.log("Pontuação na função de salvar:", score)
-  const email = localStorage.getItem("email"); 
+  console.log("Pontuação na função de salvar:", score);
+  const email = localStorage.getItem("email");
 
   if (!email) {
     alert("Erro: E-mail do jogador não encontrado.");
     return;
   }
 
-  await fetch("http://localhost:3000/score", { 
-    method: 'POST',
+  await fetch("http://localhost:3000/score", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, score })
+    body: JSON.stringify({ email, score }),
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Pontuação salva com sucesso:', data);
-  })
-  .catch((error) => {
-    console.error('Erro ao salvar pontuação:', error);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Pontuação salva com sucesso:", data);
+    })
+    .catch((error) => {
+      console.error("Erro ao salvar pontuação:", error);
+    });
 }
 
 function startTimer(time) {
