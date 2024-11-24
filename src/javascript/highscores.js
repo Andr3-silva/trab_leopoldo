@@ -70,7 +70,6 @@ function displayHighScores(scores) {
     
     if (isCurrentUser) {
       li.classList.add("current-user");
-      li.innerHTML += `<span class="badge">Você!</span>`;
       isLastScoreInTopFive = true;
     }
     
