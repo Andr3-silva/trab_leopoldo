@@ -3,10 +3,12 @@ function checkAuthentication() {
   const token = localStorage.getItem("token");
   if (!token) {
     // Usuário não está autenticado, redireciona para a página de login
-    window.location.href = "./login.html";
+    alert("Usuário não autenticado! Redirecionando para a tela de login...");
+    window.location.href = "../src/pages/Cadastro/login.html";
   }
 }
 
+// Chama a função de verificação ao carregar o script
 checkAuthentication();
 
 //selecting all required elements
@@ -211,7 +213,8 @@ function showResult() {
   }
 
   const pontuacaoGame = userScore * 10;
-  localStorage.setItem("scoreGame", pontuacaoGame);
+  console.log("Pontuação", pontuacaoGame);
+  localStorage.setItem("score", pontuacaoGame);
   savePlayerScore(userScore * 10);
 }
 

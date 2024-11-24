@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-     // Função de Logout
-     function logout() {
+    // Função de Logout
+    function logout() {
         // Remover o email do localStorage para deslogar o usuário
         localStorage.removeItem("email");
         
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Vincular a função de logout ao botão
     document.getElementById("logoutButton").addEventListener("click", logout);
-
 
     // Função para buscar dados do jogador no backend
     async function getPlayerData() {
@@ -30,6 +29,21 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('playerName').textContent = data.nome;  // 'nome' vindo do backend
             document.getElementById('playerEmail').textContent = data.email; // 'email' vindo do backend
             document.getElementById('playerScore').textContent = data.pontuacao; // 'pontuacao' vindo do backend
+
+            // Verificar se a pontuação do jogador é a maior
+            const highScoreResponse = await fetch("http://localhost:3000/vencedor", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const highScoreData = await highScoreResponse.json();
+
+            // Comparar a pontuação do jogador com a maior pontuação
+            if (data.pontuacao === highScoreData.pontuacao) {
+                // Redirecionar para a página de vencedor
+                window.location.href = "vencedor.html";
+            }
         } catch (error) {
             console.error('Erro ao buscar dados do jogador:', error);
         }
@@ -43,4 +57,5 @@ document.addEventListener('DOMContentLoaded', function() {
         const navbarLinks = document.querySelector('.navbar-links');
         navbarLinks.classList.toggle('show');
     };
+
 });
