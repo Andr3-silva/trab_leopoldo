@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     const novoUsuario = await Usuario.create({
       nome: nome,
       email: email,
-      hierarquia: hierarquia,
+      hierarquia: 0,
       senha: hashedSenha,
     });
 
