@@ -1,38 +1,32 @@
 const express = require("express");
 const authenticateToken = require("../../middleware/auth");
 const Usuario = require("../../models/usuarios");
-
 const router = express.Router();
 
-router.put("/hierarquia/:id", async (req, res) => {
+// Rota para verificar se o usuário tem hierarquia 1
+router.get("/:email", async (req, res) => {
   try {
-    const id = req.params.id;
-    console.log(id);
+    const userEmail = req.params.email;  // Obtém o email do usuário logado via token
+    console.log("email na rota de vencedor:", userEmail)
+    // Encontrar o usuário logado
+    const usuario = await Usuario.findOne({ where: { email: userEmail } });
 
-    // Encontrar o usuário a ser atualizado
-    const usuario = await Usuario.findByPk(id);
     if (!usuario) {
       return res.status(404).json({ message: "Usuário não encontrado." });
     }
 
-    // Atualizar o campo 'hierarquia'
-    usuario.hierarquia = 1;
-    await usuario.save();
+  console.log(`O usuário ${usuario.nome} tem hierarquia ${usuario.hierarquia}` )
 
-    res.status(200).json({
-      message: "Hierarquia atualizada com sucesso.",
-      usuario: {
-        id: usuario.id,
-        nome: usuario.nome,
-        email: usuario.email,
-        hierarquia: usuario.hierarquia,
-      },
-    });
+    // Verificar se o usuário tem hierarquia 1
+    if (usuario.hierarquia === 1) {
+      return res.status(200).json({ isWinner: true, usuario: usuario });
+    } else {
+      return res.status(200).json({ isWinner: false });
+    }
+
   } catch (error) {
-    console.error("Erro ao atualizar hierarquia:", error);
-    res
-      .status(500)
-      .json({ message: "Erro interno do servidor ao atualizar hierarquia." });
+    console.error("Erro ao verificar hierarquia:", error);
+    res.status(500).json({ message: "Erro interno do servidor ao verificar hierarquia." });
   }
 });
 

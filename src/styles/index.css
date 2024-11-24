@@ -544,20 +544,21 @@ footer button.show {
     }
   }
 
+/* Estilos para o botão de Meio a Meio */
 .hint_btn {
     background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    margin-left: 20px;
+    margin-left: 10px;
     border-radius: 5px;
     font-size: 14px;
     transition: background-color 0.3s;
   }
   
   .hint_btn:hover {
-    background-color: #0059b9;
+    background-color: #004ea1;
   }
   
   .hint_btn:disabled {
@@ -565,4 +566,36 @@ footer button.show {
     cursor: not-allowed;
   }
   
+  /* Estilos para o botão de Pular a Questão */
+  .skip_btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
   
+  .skip_btn:hover {
+    background-color: #007bff;
+  }
+  
+  .skip_btn:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+  
+  /* Ajustes adicionais para layout, se necessário */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .header-buttons {
+    display: flex;
+    align-items: center;
+  }

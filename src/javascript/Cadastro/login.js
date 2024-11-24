@@ -37,8 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const { token, usuario } = data;
 
         // Salva o token e o email no localStorage
-        localStorage.setItem("token", token);
-        localStorage.setItem("email", usuario.email);
+        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("email", usuario.email);
 
         // Redireciona para a página desejada após o login
         window.location.href = "../../pages/sobre.html"; // Substitua pelo caminho correto
