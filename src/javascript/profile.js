@@ -11,7 +11,10 @@ function logout() {
 document.getElementById("logoutButton").addEventListener("click", logout);
 
 document.addEventListener("DOMContentLoaded", function () {
-
+  window.toggleNavbar = function() {
+    const navbarLinks = document.querySelector('.navbar-links');
+    navbarLinks.classList.toggle('show');
+};
   const email = sessionStorage.getItem("email");
   if (!email) {
     // Exibir prompt de login/cadastro
