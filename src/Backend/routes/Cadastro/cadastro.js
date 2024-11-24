@@ -32,6 +32,8 @@ router.post("/", async (req, res) => {
       email: email,
       hierarquia: 0,
       senha: hashedSenha,
+      pontuacao: 0,
+      pontuacaoMax: 0,
     });
 
     res.status(201).json({
@@ -41,7 +43,8 @@ router.post("/", async (req, res) => {
         hierarquia: novoUsuario.hierarquia,
         nome: novoUsuario.nome,
         email: novoUsuario.email,
-        // Não retorne a senha mesmo que esteja hasheada
+        pontuacao: novoUsuario.pontuacao,
+        pontuacaoMax: novoUsuario.pontuacaoMax,
       },
     });
   } catch (error) {

@@ -34,6 +34,11 @@ const Usuario = sequelize.define(
       allowNull: true,
       defaultValue: null,
     },
+    pontuacaoMax: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: null,
+    },
   },
   {
     tableName: "usuarios",
