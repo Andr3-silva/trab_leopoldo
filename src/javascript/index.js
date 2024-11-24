@@ -29,12 +29,19 @@ const timeCount = document.querySelector(".timer .timer_sec");
 const loader = document.getElementById("loader");
 loader.classList.add("hidden");
 
-// --- 1. Seleção e Configuração do Botão de Meio a Meio ---
-const hintButton = document.querySelector(".hint_btn"); // Seleciona o botão de Meio a Meio
+// --- 1. Seleção e Configuração dos Botões de Meio a Meio e Pular a Questão ---
 
-let hintsRemaining = 1; // Variável global para rastrear o número de dicas restantes
+// Seleciona o botão de Meio a Meio
+const hintButton = document.querySelector(".hint_btn");
 
-hintButton.addEventListener("click", useHint); // Adiciona o event listener para o botão de Meio a Meio
+// Seleciona o botão de Pular a Questão
+const skipButton = document.querySelector(".skip_btn");
+
+let hintsRemaining = 1; // Número de usos da dica de Meio a Meio (1 vez por quiz)
+let skipsRemaining = 2; // Número de usos do pular a questão (2 vezes por quiz)
+
+hintButton.addEventListener("click", useHint); // Event listener para Meio a Meio
+skipButton.addEventListener("click", skipQuestion); // Event listener para Pular a Questão
 
 // se startQuiz button clicado
 start_btn.onclick = () => {
@@ -62,7 +69,7 @@ continue_btn.onclick = () => {
     queCounter(1); // Atualiza o contador de perguntas
     startTimer(timeValue); // Inicia o timer
     startTimerLine(0); // Inicia a linha do timer
-    resetHints(); // Reseta o estado das dicas
+    resetHintsAndSkips(); // Reseta o estado das dicas e pulos
   }
 };
 
@@ -100,9 +107,7 @@ next_btn.onclick = () => {
     timeText.textContent = "Tempo Restante"; // Atualiza o texto do timer
     next_btn.classList.remove("show"); // Esconde o botão de próxima pergunta
 
-    // Resetar o estado da dica
-    // Neste caso, como a dica é usada apenas uma vez por quiz, não é necessário resetar por pergunta
-    // Apenas garantir que a dica já foi usada ou não
+    // Como a dica é usada apenas uma vez por quiz, não é necessário resetar por pergunta
   } else {
     clearInterval(counter); // Limpa o timer
     clearInterval(counterLine); // Limpa a linha do timer
@@ -110,7 +115,7 @@ next_btn.onclick = () => {
   }
 };
 
-// --- 3. Ajuste na Função showQuetions para Facilitar a Lógica de Meio a Meio ---
+// --- 3. Ajuste na Função showQuetions para Facilitar a Lógica das Funcionalidades ---
 function showQuetions(index) {
   loader.classList.add("hidden"); // Esconde o loader
   const que_text = document.querySelector(".que_text");
@@ -340,7 +345,9 @@ function queCounter(index) {
   bottom_ques_counter.innerHTML = totalQueCounTag; // Adiciona o contador no HTML
 }
 
-// --- 2. Implementação da Função useHint ---
+// --- 2. Implementação das Funções useHint e skipQuestion ---
+
+// Função para usar a dica de Meio a Meio
 function useHint() {
   if (hintsRemaining <= 0) return; // Impede uso se não houver dicas restantes
 
@@ -374,10 +381,39 @@ function useHint() {
   });
 }
 
-// --- 4. Resetar o Estado da Dica ao Iniciar um Novo Quiz ---
-function resetHints() {
+// Função para pular a questão
+function skipQuestion() {
+  if (skipsRemaining <= 0) return; // Impede uso se não houver pulos restantes
+
+  skipsRemaining--; // Decrementa o número de pulos restantes
+  skipButton.disabled = true; // Desativa o botão após uso
+
+  // Avança para a próxima pergunta
+  if (que_count < questions.length - 1) {
+    que_count++; // Incrementa o índice da pergunta
+    que_numb++; // Incrementa o número da pergunta
+    showQuetions(que_count); // Mostra a próxima pergunta
+    queCounter(que_numb); // Atualiza o contador de perguntas
+    clearInterval(counter); // Limpa o timer
+    clearInterval(counterLine); // Limpa a linha do timer
+    startTimer(timeValue); // Reinicia o timer
+    startTimerLine(widthValue); // Reinicia a linha do timer
+    timeText.textContent = "Tempo Restante"; // Atualiza o texto do timer
+    next_btn.classList.remove("show"); // Esconde o botão de próxima pergunta
+  } else {
+    // Se não houver mais perguntas, mostra o resultado
+    clearInterval(counter); // Limpa o timer
+    clearInterval(counterLine); // Limpa a linha do timer
+    showResult(); // Mostra o resultado final
+  }
+}
+
+// --- 4. Resetar o Estado das Dicas e Pulos ao Iniciar um Novo Quiz ---
+function resetHintsAndSkips() {
   hintsRemaining = 1; // Reseta o número de dicas restantes
+  skipsRemaining = 2; // Reseta o número de pulos restantes
   hintButton.disabled = false; // Habilita o botão de dica
+  skipButton.disabled = false; // Habilita o botão de pular
 }
 
 // Selecionar o botão de visualizar score
