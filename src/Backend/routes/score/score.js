@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
     }
 
     const usuario = await Usuario.findOne({ where: { email } });
-    const usuarioMaxPont = await Usuario.findOne({ hierarquia : 1})
+    const usuarioMaxPont = await Usuario.findOne({ where : {hierarquia:1 }})
     //console.log(usuarioMaxPont)
 
     if (!usuario) {
@@ -50,7 +50,6 @@ router.post("/", async (req, res) => {
     res.status(500).json({ message: "Erro ao salvar a pontuação" });
   }
 });
-
 
 router.get("/", async (req, res) => {
   
