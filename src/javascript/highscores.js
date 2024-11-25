@@ -76,6 +76,7 @@ function displayHighScores(scores) {
     highscoresList.appendChild(li);
     console.log(`Adicionado: ${player.nome} - ${player.pontuacao}`);
   });
+ 
 
   // Se a última pontuação não está no Top 5, exibi-la separadamente
   if (!isLastScoreInTopFive && lastScore !== null) {
@@ -83,6 +84,14 @@ function displayHighScores(scores) {
     lastScoreDiv.innerHTML = `
       <h2>Sua Última Pontuação</h2>
       <p>Você marcou <strong>${lastScore}</strong> pontos!</p>
+    `;
+  } 
+  
+  if(lastScore === null) {
+    const lastScoreDiv = document.querySelector(".last-score");
+    lastScoreDiv.innerHTML = `
+      <h2>Jogue para tentar bater essas pontuações!</h2>
+      
     `;
   }
 }

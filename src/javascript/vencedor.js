@@ -1,6 +1,8 @@
 function logout() {
     // Remover o email do localStorage para deslogar o usuário
     sessionStorage.removeItem("email");
+    sessionStorage.removeItem("score");
+    sessionStorage.removeItem("token");
   
     // Redirecionar o usuário para a página inicial ou de login
     window.location.href = "home.html"; // Mude "home.html" para a página de login se houver uma
