@@ -23,10 +23,17 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ message: "Usuário não encontrado." });
     }
 
+    console.log("Pontuacao do usuario antes de atualizar:",usuario.pontuacao)
+    
+    if(usuario.pontuacao == 0){
+      console.log("Pontuação está zerada")
+      return res.status(200).send("Pontuação zerada")
+    }
+
     const pontuacaoAtual = usuario.pontuacao;
 
     // console.log("Pontuação no banco:", pontuacaoAtual)
-    
+
     if (score) {
       await usuario.update({ pontuacao: score });
       console.log("Pontuação atualizada.");
