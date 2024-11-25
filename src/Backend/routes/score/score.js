@@ -8,44 +8,42 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     const { email, score } = req.body;
-    console.log("score do quiz", score)
-    console.log("email",email)
+    console.log("score do quiz", score);
+    console.log("email", email);
 
     if (!score) {
       return res.status(400).json({ message: "Nenhuma pontuação enviada!" });
     }
 
     const usuario = await Usuario.findOne({ where: { email } });
-    const usuarioMaxPont = await Usuario.findOne({ where : {hierarquia:1 }})
-    //console.log(usuarioMaxPont)
+    const usuarioMaxPont = await Usuario.findOne({ where: { hierarquia: 1 } });
+    console.log("usuarioMaxPont",usuarioMaxPont)
 
     if (!usuario) {
       return res.status(400).json({ message: "Usuário não encontrado." });
     }
 
-    console.log("Pontuacao do usuario antes de atualizar:",usuario.pontuacao)
-    
-    if(usuario.pontuacao == 0){
-      console.log("Pontuação está zerada")
-      return res.status(200).send("Pontuação zerada")
-    }
-
     const pontuacaoAtual = usuario.pontuacao;
-
-    // console.log("Pontuação no banco:", pontuacaoAtual)
+    console.log("Pontuacao do usuario antes de atualizar:", pontuacaoAtual);
 
     if (score) {
       await usuario.update({ pontuacao: score });
       console.log("Pontuação atualizada.");
     }
 
-    if(!pontuacaoAtual || score > usuario.pontuacaoMax){
+    if (score > usuario.pontuacaoMax) {
       await usuario.update({ pontuacaoMax: score });
     }
-    
-    if(score >= usuarioMaxPont.pontuacao){
-      await usuarioMaxPont.update({hierarquia: 0})
-      await usuario.update({hierarquia: 1})
+
+    if (usuarioMaxPont) {
+      console.log("Nenhum usuario com hierarquia 1")
+      if (score >= usuarioMaxPont.pontuacao) {
+        await usuarioMaxPont.update({ hierarquia: 0 });
+        await usuario.update({ hierarquia: 1 });
+      }
+    } else {
+      console.log("Primeira hierarquia")
+      await usuario.update({ hierarquia: 1 });
     }
 
     res.status(200).json({
@@ -59,19 +57,17 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  
   try {
     const pontuacoes = await Usuario.findAll({
-      attributes: ["nome", "pontuacao", "email"]
-    })
+      attributes: ["nome", "pontuacaoMax", "email"],
+    });
 
-  //console.log(pontuacoes)
+    //console.log(pontuacoes)
 
-  res.status(200).send(pontuacoes)
-    
+    res.status(200).send(pontuacoes);
   } catch (error) {
-    console.log("Erro ao puxar as pontuações")
-    res.status(400).send({error: error})
+    console.log("Erro ao puxar as pontuações");
+    res.status(400).send({ error: error });
   }
 });
 
