@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/profile.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Perfil do Jogador</title>
 </head>
 <body>
@@ -45,7 +47,20 @@
                     <span id="playerScore">Carregando...</span>
                 </div>
             </div>
+            <div class="buttons">
+                <button class="register_btn" onclick="window.location.href='highscores.html'">Ver Mais Pontuações</button>
+                <button class="register_btn" id="twitterShareButton">
+                    <i class="fab fa-twitter"></i> Compartilhar no Twitter
+                </button>
+                
+                <!-- WhatsApp share button with icon -->
+                <button class="register_btn" id="whatsappShareButton">
+                    <i class="fab fa-whatsapp"></i> Compartilhar no WhatsApp
+                </button>
+    
+            </div>
         </div>
+        
     </div>
 
     <script src="../javascript/profile.js"></script>
