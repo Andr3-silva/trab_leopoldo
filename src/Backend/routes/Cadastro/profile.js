@@ -1,13 +1,16 @@
 const express = require("express");
 const Usuario = require("../../models/usuarios");
+const authToken = require("../../middleware/auth");
 
 const router = express.Router();
+router.use(authToken);
 
 // Rota para obter o perfil do usuário
 router.get("/", async (req, res) => {
   try {
     // Recuperar o email do usuário a partir dos parâmetros de consulta (query params)
-    const { email } = req.query;
+    const { email } = req.user.email;
+    console.log("Email do profile", email);
     //console.log("email na rota /profile: ",email);
     if (!email) {
       return res.status(400).json({ message: "Email não fornecido." });

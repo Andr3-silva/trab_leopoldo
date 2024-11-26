@@ -1,10 +1,11 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const Usuario = require("../../models/usuarios");
+const authToken = require("../../middleware/auth");
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", authToken, async (req, res) => {
   try {
     const { nome, email, senha, hierarquia } = req.body;
     console.log("Tentativa de cadastro com email:", email);

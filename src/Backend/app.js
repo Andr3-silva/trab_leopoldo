@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -8,6 +9,7 @@ const score = require("./routes/score/score");
 const profile = require("./routes/Cadastro/profile");
 const feedback = require("./routes/Feedback/feedbackRoute");
 const hierarquia = require("./routes/Cadastro/hierarquia");
+const quiz = require("../Backend/routes/Quiz/quiz");
 
 app.use(express.json());
 
@@ -28,6 +30,7 @@ app.use("/score", score);
 app.use("/profile", profile);
 app.use("/feedback", feedback);
 app.use("/verificarHierarquia", hierarquia);
+app.use("/", quiz);
 
 app.listen(PORT, () => {
   console.log("Servidor Rodando na porta 3000");

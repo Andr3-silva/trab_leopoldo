@@ -3,9 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authenticateToken = require("../../middleware/auth");
 const Usuario = require("../../models/usuarios");
+require("dotenv").config();
 
 const router = express.Router();
-const SECRET_KEY = "sua_chave_secreta"; // Substitua por uma chave segura em produção
+const SECRET_KEY = "andre";
+console.log("Valor de SECRET_KEY:", SECRET_KEY);
 
 router.post("/", async (req, res) => {
   try {

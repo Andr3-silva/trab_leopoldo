@@ -321,7 +321,7 @@ section .option_list .option .icon {
 
 .choice-prefix {
     padding: 1rem 2rem;
-    background-color: #56a5eb;
+    background-color: #007bff;
     color: white;
 }
 
@@ -580,7 +580,7 @@ footer button.show {
   }
   
   .skip_btn:hover {
-    background-color: #007bff;
+    background-color: #004fa3;
   }
   
   .skip_btn:disabled {
@@ -598,4 +598,26 @@ footer button.show {
   .header-buttons {
     display: flex;
     align-items: center;
+  }
+
+  /* Estilos para o botão de Salvar Progresso */
+.save_btn {
+    background-color: #007bff; /* Cor de fundo verde */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .save_btn:hover {
+    background-color: #004fa4;
+  }
+  
+  .save_btn:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
   }

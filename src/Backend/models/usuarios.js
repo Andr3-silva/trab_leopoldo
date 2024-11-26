@@ -39,6 +39,22 @@ const Usuario = sequelize.define(
       allowNull: true,
       defaultValue: null,
     },
+    // Campos para salvar o progresso do Quiz
+    currentQuestion: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    },
+    quizScore: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    },
+    quizCompleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+    },
   },
   {
     tableName: "usuarios",

@@ -17,12 +17,13 @@ router.post("/", async (req, res) => {
 
     const usuario = await Usuario.findOne({ where: { email } });
     const usuarioMaxPont = await Usuario.findOne({ where: { hierarquia: 1 } });
-    console.log("usuarioMaxPont",usuarioMaxPont)
+    console.log("usuarioMaxPont", usuarioMaxPont);
 
     if (!usuario) {
       return res.status(400).json({ message: "Usuário não encontrado." });
     }
 
+    await usuario.update({ quizCompleted: true });
     const pontuacaoAtual = usuario.pontuacao;
     console.log("Pontuacao do usuario antes de atualizar:", pontuacaoAtual);
 
@@ -36,13 +37,13 @@ router.post("/", async (req, res) => {
     }
 
     if (usuarioMaxPont) {
-      console.log("Nenhum usuario com hierarquia 1")
+      console.log("Nenhum usuario com hierarquia 1");
       if (score >= usuarioMaxPont.pontuacao) {
         await usuarioMaxPont.update({ hierarquia: 0 });
         await usuario.update({ hierarquia: 1 });
       }
     } else {
-      console.log("Primeira hierarquia")
+      console.log("Primeira hierarquia");
       await usuario.update({ hierarquia: 1 });
     }
 
