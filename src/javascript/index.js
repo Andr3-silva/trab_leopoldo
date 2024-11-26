@@ -134,6 +134,23 @@ function showQuetions(index) {
   loader.classList.add("hidden"); // Esconde o loader
   const que_text = document.querySelector(".que_text");
 
+  // **Reabilita os botões de dica e pular ao carregar uma nova questão**
+  if (hintsRemaining > 0) {
+    hintButton.disabled = false;
+    console.log("Botão de dica reabilitado.");
+  } else {
+    hintButton.disabled = true;
+    console.log("Botão de dica permanece desabilitado.");
+  }
+
+  if (skipsRemaining > 0) {
+    skipButton.disabled = false;
+    console.log("Botão de pular reabilitado.");
+  } else {
+    skipButton.disabled = true;
+    console.log("Botão de pular permanece desabilitado.");
+  }
+
   // Criando a tag da pergunta
   let que_tag =
     "<span>" +
@@ -328,6 +345,13 @@ function startTimer(time) {
       for (let i = 0; i < allOptions; i++) {
         option_list.children[i].classList.add("disabled");
       }
+
+      // **Desabilita os botões de dica e pular após o tempo expirar**
+      hintButton.disabled = true;
+      skipButton.disabled = true;
+      console.log(
+        "Botões de dica e pular desabilitados devido ao tempo expirar."
+      );
 
       // Mostra o botão de próxima pergunta
       next_btn.classList.add("show");
