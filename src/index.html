@@ -134,31 +134,31 @@
 
     <!-- Music JavaScript -->
     <script>
-      const musicToggle = document.getElementById("musicToggle");
-      const audio = new Audio("./data/fundo.mp3"); // Caminho da sua música
+        const musicToggle = document.getElementById("musicToggle");
+        const audio = new Audio("./data/fundo.mp3"); // Caminho da sua música
 
-      musicToggle.addEventListener("click", () => {
-        if (audio.paused) {
-          audio.play();
-          musicToggle.innerHTML = '<i class="fas fa-pause"></i> Parar Música';
-        } else {
-          audio.pause();
-          musicToggle.innerHTML = '<i class="fas fa-play"></i> Tocar Música';
+        musicToggle.addEventListener("click", () => {
+          if (audio.paused) {
+            audio.play();
+            musicToggle.innerHTML = '<i class="fas fa-pause"></i> Parar Música';
+          } else {
+            audio.pause();
+            musicToggle.innerHTML = '<i class="fas fa-play"></i> Tocar Música';
+          }
+        });
+  
+        // Efeito sonoro para cliques
+        const clickSound = new Audio("./data/botao.mp3"); // Caminho para o som de clique
+  
+        function playClickSound() {
+          clickSound.currentTime = 0; // Reinicia o som para reproduzir do início
+          clickSound.play();
         }
-      });
-
-      // Efeito sonoro para cliques
-      const clickSound = new Audio("./data/botao.mp3"); // Caminho para o som de clique
-
-      function playClickSound() {
-        clickSound.currentTime = 0; // Reinicia o som para reproduzir do início
-        clickSound.play();
-      }
-
-      // Seleciona todos os botões da página e adiciona o efeito de som de clique
-      document.querySelectorAll("button").forEach((button) => {
-        button.addEventListener("click", playClickSound);
-      });
+  
+        // Seleciona todos os botões da página e adiciona o efeito de som de clique
+        document.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", playClickSound);
+        });
     </script>
   </body>
 </html>

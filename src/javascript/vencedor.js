@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch the player's data
     async function getPlayerData() {
-        const email = localStorage.getItem("email");
+        const email = sessionStorage.getItem("email");
         try {
             const response = await fetch(`http://localhost:3000/profile?email=${encodeURIComponent(email)}`, {
                 method: "GET",
@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Update the elements with the player's name and score
             document.getElementById('winner-name').textContent = data.nome;
-            document.getElementById('winner-score').textContent = data.pontuacao;
+            document.getElementById('winner-score').textContent = data.pontuacaoMax;
 
-            const shareText = `Eu, ${data.nome}, atingi ${data.pontuacao} pontos no jogo 'Quiz'! Será que você consegue me vencer?`;
+            const shareText = `Eu, ${data.nome}, atingi ${data.pontuacaoMax} pontos no jogo 'Quiz'! Será que você consegue me vencer?`;
             const shareUrl = ''; // Replace with your actual public URL
 
             // Set up the Twitter share button

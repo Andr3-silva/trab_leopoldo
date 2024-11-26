@@ -142,10 +142,7 @@ body {
     margin-top: 20px;
 }
 
-/* Estilos para o botão "Ver Mais Pontuações" */
-#highscoresButton {
-    /* Se precisar de estilos específicos, adicione aqui */
-}
+
 
 /* Estilos para responsividade */
 @media (max-width: 768px) {
