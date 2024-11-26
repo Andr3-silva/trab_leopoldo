@@ -43,6 +43,31 @@ let skipsRemaining = 2; // Número de usos do pular a questão (2 vezes por quiz
 hintButton.addEventListener("click", useHint); // Event listener para Meio a Meio
 skipButton.addEventListener("click", skipQuestion); // Event listener para Pular a Questão
 
+// Definição global da função startQuiz
+async function startQuiz(savedProgress = null) {
+  loader.classList.add("hidden"); // Esconde o loader
+  start_btn_home.classList.remove("hidden"); // Mostra o botão de start novamente
+  quiz_box.classList.add("activeQuiz"); // Mostra a quiz box
+
+  if (savedProgress) {
+    que_count = savedProgress.currentQuestion;
+    que_numb = que_count + 1;
+    userScore = savedProgress.quizScore;
+    scoreTextPoint.innerHTML = userScore * 10;
+  } else {
+    que_count = 0;
+    que_numb = 1;
+    userScore = 0;
+    scoreTextPoint.innerHTML = 0;
+  }
+
+  showQuetions(que_count); // Chama a função para mostrar a primeira pergunta ou a salva
+  queCounter(que_numb); // Atualiza o contador de perguntas
+  startTimer(timeValue); // Inicia o timer
+  startTimerLine(0); // Inicia a linha do timer
+  resetHintsAndSkips(); // Reseta o estado das dicas e pulos
+}
+
 // se startQuiz button clicado
 start_btn.onclick = () => {
   info_box.classList.add("activeInfo"); // Mostra a info box
@@ -59,18 +84,7 @@ continue_btn.onclick = () => {
   start_btn_home.classList.add("hidden"); // Esconde o botão de start
 
   loader.classList.remove("hidden"); // Mostra o loader
-  const myTimeout = setTimeout(startQuiz, 3000); // Inicia o quiz após 3 segundos
-
-  function startQuiz() {
-    loader.classList.add("hidden"); // Esconde o loader
-    start_btn_home.classList.remove("hidden"); // Mostra o botão de start novamente
-    quiz_box.classList.add("activeQuiz"); // Mostra a quiz box
-    showQuetions(0); // Chama a função para mostrar a primeira pergunta
-    queCounter(1); // Atualiza o contador de perguntas
-    startTimer(timeValue); // Inicia o timer
-    startTimerLine(0); // Inicia a linha do timer
-    resetHintsAndSkips(); // Reseta o estado das dicas e pulos
-  }
+  setTimeout(() => startQuiz(), 3000); // Inicia o quiz após 3 segundos
 };
 
 let timeValue = 15;
@@ -423,3 +437,106 @@ const viewScoreBtn = result_box.querySelector(".buttons #view-score");
 viewScoreBtn.onclick = () => {
   window.location.href = "./pages/highscores.html";
 };
+
+// Seleciona o botão de Salvar Progresso
+const saveButton = document.querySelector(".save_btn");
+
+// Adiciona o event listener para salvar o progresso
+saveButton.addEventListener("click", saveProgress);
+
+async function saveProgress() {
+  // Desabilita o botão para evitar múltiplos cliques
+  saveButton.disabled = true;
+  saveButton.textContent = "Salvando...";
+
+  // Coleta os dados atuais do quiz
+  const progressData = {
+    currentQuestion: que_count,
+    quizScore: userScore,
+    quizCompleted: false,
+  };
+
+  const email = sessionStorage.getItem("email");
+  const token = sessionStorage.getItem("token");
+
+  if (!email || !token) {
+    alert("Erro: Usuário não autenticado.");
+    saveButton.disabled = false;
+    saveButton.textContent = "Salvar Progresso";
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/save-progress", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Supondo que você use tokens JWT
+      },
+      body: JSON.stringify({
+        email,
+        ...progressData,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("Progresso salvo com sucesso!");
+      window.location.href = "./pages/home.html";
+    } else {
+      alert(`Erro ao salvar progresso: ${result.message}`);
+    }
+  } catch (error) {
+    console.error("Erro ao salvar progresso:", error);
+    alert("Ocorreu um erro ao salvar o progresso. Tente novamente.");
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = "Salvar Progresso";
+  }
+}
+
+async function loadSavedProgress() {
+  const token = sessionStorage.getItem("token");
+  const email = sessionStorage.getItem("email");
+
+  if (!token || !email) {
+    alert("Erro: Usuário não autenticado.");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/get-progress", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const result = await response.json();
+
+    if (!result.quizCompleted) {
+      // Iniciar o quiz com o progresso salvo
+      startQuiz(result);
+    } else {
+      // Não há progresso salvo, iniciar o quiz normalmente
+      startQuiz();
+    }
+  } catch (error) {
+    console.error("Erro ao carregar progresso salvo:", error);
+    alert("Ocorreu um erro ao carregar o progresso salvo.");
+    // Iniciar o quiz normalmente
+    startQuiz();
+  }
+}
+
+// Verificar se há parâmetros na URL para continuar o quiz
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const continueQuiz = urlParams.get("continue");
+
+  if (continueQuiz === "true") {
+    loadSavedProgress();
+  }
+});

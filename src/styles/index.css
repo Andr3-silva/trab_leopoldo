@@ -599,3 +599,25 @@ footer button.show {
     display: flex;
     align-items: center;
   }
+
+  /* Estilos para o botão de Salvar Progresso */
+.save_btn {
+    background-color: #007bff; /* Cor de fundo verde */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .save_btn:hover {
+    background-color: #004fa4;
+  }
+  
+  .save_btn:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
