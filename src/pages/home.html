@@ -51,19 +51,48 @@
     </nav>
 
     <div class="info_box">
-        <div class="info-title">Bem-vindo ao Quiz!</div>
-        <div class="info-list">
-            <p class="info">Neste quiz, você enfrentará uma série de perguntas sobre diferentes temas.</p>
-            <p class="info">Quanto mais questões corretas, mais pontos ganhará!</p>
-        </div>
-        <div class="buttons">
-            <!-- Botões de login e cadastro que serão escondidos quando o usuário estiver logado -->
-            <button class="login_btn" id="login_btn"><a href="./Cadastro/login.html">Login</a></button>
-            <a href="./Cadastro/cadastro.html"><button class="register_btn" id="register_btn">Cadastro</button></a>
-            
-            <!-- Botão de jogar que será exibido quando o usuário estiver logado -->
-            <button class="play_btn" id="play_btn" style="display: none;"><a href="/src/index.html">Jogar</a></button>
-        </div>
+      <div class="info-title">Bem-vindo ao Quiz!</div>
+      <div class="info-list">
+        <p class="info">
+          Neste quiz, você enfrentará uma série de perguntas sobre diferentes
+          temas.
+        </p>
+        <p class="info">Quanto mais questões corretas, mais pontos ganhará!</p>
+      </div>
+      <div class="buttons">
+        <!-- Botões de login e cadastro que serão escondidos quando o usuário estiver logado -->
+        <button
+          class="login_btn"
+          id="login_btn"
+        >
+          <a href="./Cadastro/login.html">Login</a>
+        </button>
+        <a href="./Cadastro/cadastro.html"
+          ><button
+            class="register_btn"
+            id="register_btn"
+          >
+            Cadastro
+          </button></a
+        >
+
+        <!-- Botão de jogar que será exibido quando o usuário estiver logado -->
+        <button
+          class="play_btn"
+          id="play_btn"
+          style="display: none"
+        >
+          <a href="/src/index.html">Jogar</a>
+        </button>
+        <!--  Botão de Continuar Quiz que será exibido quando houver progresso salvo -->
+        <button
+          class="continue_btn"
+          id="continue_btn"
+          style="display: none"
+        >
+          <a href="/src/index.html?continue=true">Continuar Quiz</a>
+        </button>
+      </div>
     </div>
 
     <script src="../javascript/script.js"></script>

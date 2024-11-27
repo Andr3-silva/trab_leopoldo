@@ -43,7 +43,7 @@ async function checkSavedProgress() {
     });
 
     const result = await response.json();
-    console.log("Resultado do quiz", result.quizCompleted);
+    console.log(!result.quizCompleted);
     if (!result.quizCompleted) {
       // Mostrar o botão "Continuar Quiz"
       document.getElementById("continue_btn").style.display = "inline-block";

@@ -13,17 +13,17 @@ function logout() {
 document.getElementById("logoutButton").addEventListener("click", logout);
 
 document.addEventListener("DOMContentLoaded", function () {
-  window.toggleNavbar = function() {
-    const navbarLinks = document.querySelector('.navbar-links');
-    navbarLinks.classList.toggle('show');
-};
+  window.toggleNavbar = function () {
+    const navbarLinks = document.querySelector(".navbar-links");
+    navbarLinks.classList.toggle("show");
+  };
   const email = sessionStorage.getItem("email");
   if (!email) {
     // Exibir prompt de login/cadastro
     document.getElementById("loginPrompt").style.display = "block";
     document.getElementById("profileSection").style.display = "none";
   }
-  
+
   // Função para verificar se o usuário tem a maior pontuação
   async function verificarPontuacao() {
     try {
@@ -73,25 +73,32 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
 
       // Atualizar os elementos com o nome, email e pontuação do jogador
+      console.log(data.nome);
       document.getElementById("playerName").textContent = data.nome;
       document.getElementById("playerEmail").textContent = data.email;
       document.getElementById("playerScore").textContent = data.pontuacao;
 
       const shareText = `Eu, ${data.nome}, atingi ${data.pontuacao} pontos no jogo 'Quiz'! Será que você consegue me vencer?`;
-            const shareUrl = ''; // Replace with your actual public URL
+      const shareUrl = ""; // Replace with your actual public URL
 
-            // Set up the Twitter share button
-            const twitterShareButton = document.getElementById('twitterShareButton');
-            twitterShareButton.onclick = function() {
-                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-                window.open(twitterUrl, '_blank');
-            };
+      // Set up the Twitter share button
+      const twitterShareButton = document.getElementById("twitterShareButton");
+      twitterShareButton.onclick = function () {
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+          shareText
+        )}&url=${encodeURIComponent(shareUrl)}`;
+        window.open(twitterUrl, "_blank");
+      };
 
-            const whatsappShareButton = document.getElementById('whatsappShareButton');
-            whatsappShareButton.onclick = function() {
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
-                window.open(whatsappUrl, '_blank');
-            };
+      const whatsappShareButton = document.getElementById(
+        "whatsappShareButton"
+      );
+      whatsappShareButton.onclick = function () {
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+          shareText + " " + shareUrl
+        )}`;
+        window.open(whatsappUrl, "_blank");
+      };
     } catch (error) {
       console.error("Erro ao buscar dados do jogador:", error);
     }

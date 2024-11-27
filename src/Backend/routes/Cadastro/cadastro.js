@@ -5,7 +5,7 @@ const authToken = require("../../middleware/auth");
 
 const router = express.Router();
 
-router.post("/", authToken, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { nome, email, senha, hierarquia } = req.body;
     console.log("Tentativa de cadastro com email:", email);

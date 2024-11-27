@@ -3,13 +3,12 @@ const Usuario = require("../../models/usuarios");
 const authToken = require("../../middleware/auth");
 
 const router = express.Router();
-router.use(authToken);
 
 // Rota para obter o perfil do usuário
 router.get("/", async (req, res) => {
   try {
     // Recuperar o email do usuário a partir dos parâmetros de consulta (query params)
-    const { email } = req.user.email;
+    const { email } = req.query;
     console.log("Email do profile", email);
     //console.log("email na rota /profile: ",email);
     if (!email) {
@@ -19,7 +18,7 @@ router.get("/", async (req, res) => {
     // Buscar o usuário no banco de dados com base no email
     const usuario = await Usuario.findOne({
       where: { email: email },
-      attributes: ["nome", "email", "pontuacao","pontuacaoMax"], // Selecionar apenas os campos desejados
+      attributes: ["nome", "email", "pontuacao", "pontuacaoMax"], // Selecionar apenas os campos desejados
     });
 
     if (!usuario) {
@@ -31,7 +30,7 @@ router.get("/", async (req, res) => {
       nome: usuario.nome,
       email: usuario.email,
       pontuacao: usuario.pontuacao,
-      pontuacaoMax: usuario.pontuacaoMax
+      pontuacaoMax: usuario.pontuacaoMax,
     });
   } catch (error) {
     console.error("Erro ao obter informações do usuário:", error);
