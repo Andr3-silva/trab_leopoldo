@@ -566,7 +566,7 @@ footer button.show {
     cursor: not-allowed;
   }
   
-  /* Estilos para o botão de Pular a Questão */
+ 
   .skip_btn {
     background-color: #007bff;
     color: white;

@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     // Recuperar o email do usuário a partir dos parâmetros de consulta (query params)
     const { email } = req.query;
     console.log("Email do profile", email);
-    //console.log("email na rota /profile: ",email);
+
     if (!email) {
       return res.status(400).json({ message: "Email não fornecido." });
     }

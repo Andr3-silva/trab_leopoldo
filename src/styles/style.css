@@ -1,4 +1,4 @@
-/* Importando fontes do Google */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 :root {
@@ -19,7 +19,7 @@
     background: #007bff;
 }
 
-/* Barra de navegação */
+
 .navbar {
     display: flex;
     justify-content: center;
@@ -45,7 +45,7 @@
     color: #0263ca;
 }
 
-/* Estilos para a caixa de informações */
+
 .info_box {
     width: 90%;
     max-width: 610px;
@@ -115,7 +115,7 @@
 .navbar-toggle {
     display: none;
 }
-/* Media Queries para Responsividade */
+
 @media (max-width: 768px) {
     .navbar-toggle {
         display: block;

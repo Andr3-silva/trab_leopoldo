@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("email", usuario.email);
 
         // Redireciona para a página desejada após o login
-        window.location.href = "../../pages/sobre.html"; // Substitua pelo caminho correto
+        window.location.href = "../../pages/sobre.html";
       } else {
         // Erro no login
         alert(data.message || "Erro ao fazer login. Tente novamente.");

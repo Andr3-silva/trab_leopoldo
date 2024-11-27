@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM totalmente carregado.");
   fetchHighScores();
-  displayLastScore(); // Chamar a função para exibir a última pontuação
+  displayLastScore();
 });
 
 const email = sessionStorage.getItem("email");
 const lastScore = parseInt(sessionStorage.getItem("score"), 10);
 
 function fetchHighScores() {
-  fetch(`http://localhost:3000/score?email=${email}`) // Substitua pela sua rota real
+  fetch(`http://localhost:3000/score?email=${email}`)
     .then((response) => {
       console.log("Resposta recebida do servidor:", response);
       if (!response.ok) {
@@ -34,10 +34,10 @@ function displayHighScores(scores) {
     return;
   }
 
-  // Ordenar por pontuacaoMax em ordem decrescente
+  // Ordena por pontuacaoMax em ordem decrescente
   scores.sort((a, b) => b.pontuacaoMax - a.pontuacaoMax);
 
-  // Selecionar o Top 5
+  // Seleciona o Top 5
   const topFive = scores.slice(0, 5);
   console.log("Top 5 pontuações:", topFive);
 
@@ -45,12 +45,12 @@ function displayHighScores(scores) {
 
   let isLastScoreInTopFive = false;
 
-  highscoresList.innerHTML = ""; // Limpar a lista antes de atualizar
+  highscoresList.innerHTML = ""; // Limpa a lista antes de atualizar
 
   topFive.forEach((player, index) => {
     const li = document.createElement("li");
 
-    // Verificar se este jogador é o usuário atual
+    // Verifica se este jogador é o usuário atual
     const isCurrentUser = player.email === userEmail;
 
     li.innerHTML = `
@@ -72,7 +72,7 @@ function displayHighScores(scores) {
     console.log(`Adicionado ao Top 5: ${player.nome} - ${player.pontuacaoMax}`);
   });
 
-  // Exibir mensagem para a última pontuação do usuário
+  // Exibe mensagem para a última pontuação do usuário
   const lastScoreDiv = document.querySelector(".last-score");
 
   if (!isLastScoreInTopFive) {

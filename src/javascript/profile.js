@@ -6,7 +6,7 @@ function logout() {
   sessionStorage.removeItem("token");
 
   // Redirecionar o usuário para a página inicial ou de login
-  window.location.href = "home.html"; // Mude "home.html" para a página de login se houver uma
+  window.location.href = "home.html";
 }
 
 // Vincular a função de logout ao botão
@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
         {
           method: "GET",
           headers: {
-            // Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json",
           },
         }
@@ -79,9 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("playerScore").textContent = data.pontuacao;
 
       const shareText = `Eu, ${data.nome}, atingi ${data.pontuacao} pontos no jogo 'Quiz'! Será que você consegue me vencer?`;
-      const shareUrl = ""; // Replace with your actual public URL
+      const shareUrl = "";
 
-      // Set up the Twitter share button
       const twitterShareButton = document.getElementById("twitterShareButton");
       twitterShareButton.onclick = function () {
         const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(

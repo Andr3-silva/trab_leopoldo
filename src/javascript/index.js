@@ -45,7 +45,7 @@ skipButton.addEventListener("click", skipQuestion); // Event listener para Pular
 
 // Definição global da função startQuiz
 async function startQuiz(savedProgress = null) {
-  loader.classList.add("hidden"); // Esconde o loader
+  loader.classList.add("hidden");
   start_btn_home.classList.remove("hidden"); // Mostra o botão de start novamente
   quiz_box.classList.add("activeQuiz"); // Mostra a quiz box
 
@@ -120,8 +120,6 @@ next_btn.onclick = () => {
     startTimerLine(widthValue); // Reinicia a linha do timer
     timeText.textContent = "Tempo Restante"; // Atualiza o texto do timer
     next_btn.classList.remove("show"); // Esconde o botão de próxima pergunta
-
-    // Como a dica é usada apenas uma vez por quiz, não é necessário resetar por pergunta
   } else {
     clearInterval(counter); // Limpa o timer
     clearInterval(counterLine); // Limpa a linha do timer
@@ -134,7 +132,7 @@ function showQuetions(index) {
   loader.classList.add("hidden"); // Esconde o loader
   const que_text = document.querySelector(".que_text");
 
-  // **Reabilita os botões de dica e pular ao carregar uma nova questão**
+  // Reabilita os botões de dica e pular ao carregar uma nova questão
   if (hintsRemaining > 0) {
     hintButton.disabled = false;
     console.log("Botão de dica reabilitado.");
@@ -205,7 +203,6 @@ function shuffleArray(array) {
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 
-// if user clicked on option
 function optionSelected(answer) {
   clearInterval(counter); // Limpa o timer
   clearInterval(counterLine); // Limpa a linha do timer
@@ -346,7 +343,7 @@ function startTimer(time) {
         option_list.children[i].classList.add("disabled");
       }
 
-      // **Desabilita os botões de dica e pular após o tempo expirar**
+      //Desabilita os botões de dica e pular após o tempo expirar
       hintButton.disabled = true;
       skipButton.disabled = true;
       console.log(
@@ -405,7 +402,7 @@ function useHint() {
   });
 
   // Verifica se há pelo menos duas opções incorretas
-  if (incorrectOptions.length < 2) return; // Evita erros se houver menos de duas opções incorretas
+  if (incorrectOptions.length < 2) return;
 
   // Embaralha as opções incorretas
   shuffleArray(incorrectOptions);
@@ -446,7 +443,7 @@ function skipQuestion() {
   }
 }
 
-// --- 4. Resetar o Estado das Dicas e Pulos ao Iniciar um Novo Quiz ---
+//4. Resetar o Estado das Dicas e Pulos ao Iniciar um Novo Quiz
 function resetHintsAndSkips() {
   hintsRemaining = 1; // Reseta o número de dicas restantes
   skipsRemaining = 2; // Reseta o número de pulos restantes
@@ -495,7 +492,7 @@ async function saveProgress() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Supondo que você use tokens JWT
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         email,

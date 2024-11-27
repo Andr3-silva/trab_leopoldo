@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Feedback = require("../../models/feedback");
 
-// Middleware para validar o corpo da requisição
+// Middleware
 const validateFeedback = (req, res, next) => {
   const { experience, difficulty, improvements, enjoyment } = req.body;
 
@@ -19,7 +19,7 @@ router.post("/", validateFeedback, async (req, res) => {
   try {
     const { experience, difficulty, improvements, enjoyment } = req.body;
 
-    // Mapeamento dos campos do frontend para os campos do banco de dados
+    // Campos do frontend para os campos do banco de dados
     const novoFeedback = await Feedback.create({
       experiencia: experience,
       dificuldade: difficulty,

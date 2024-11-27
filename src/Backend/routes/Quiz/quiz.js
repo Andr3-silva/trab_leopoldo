@@ -5,12 +5,6 @@ const router = express.Router();
 const Usuario = require("../../models/usuarios");
 const authenticateToken = require("../../middleware/auth");
 
-/**
- * Rota para salvar o progresso do quiz
- * Método: POST
- * Endpoint: /api/quiz/save-progress
- * Body: { currentQuestion, quizScore, quizCompleted }
- */
 router.post("/save-progress", authenticateToken, async (req, res) => {
   try {
     const { currentQuestion, quizScore, quizCompleted } = req.body;
